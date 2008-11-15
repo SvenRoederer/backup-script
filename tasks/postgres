@@ -1,0 +1,13 @@
+#!/bin/sh
+
+DB_BACKUPFILE=$CURRENT_BACKUP_DIR/postgres_dump.sql.bz2
+DB_ERRORLOG=$CURRENT_BACKUP_DIR/postgres_backup.errlog
+
+touch $DB_BACKUPFILE
+touch $DB_ERRORLOG
+chown postgres $DB_BACKUPFILE
+chown postgres $DB_ERRORLOG
+su postgres -c "/usr/bin/pg_dumpall -D 2>$DB_ERRORLOG | bzip2 >$DB_BACKUPFILE"
+chown root $DB_BACKUPFILE
+chown root $DB_ERRORLOG
+

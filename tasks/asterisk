@@ -1,0 +1,7 @@
+#!/bin/bash
+
+BACKUP_FILE=$CURRENT_BACKUP_DIR/asterisk.tar
+
+tar -cf $BACKUP_FILE -C /var/spool/asterisk voicemail
+tar -rf $BACKUP_FILE -C / var/lib/asterisk
+bzip2 $BACKUP_FILE
