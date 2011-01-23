@@ -1,6 +1,5 @@
 #!/bin/sh
 
-BACKUP_DIRS="/etc /mnt/apps/mail /mnt/apps/webserver /mnt/dbs/dns"
 BACKUP_DIRS="/etc /var/lib/afbackup /var/lib/afbackup-client"
 
 for dir in $BACKUP_DIRS ; do
