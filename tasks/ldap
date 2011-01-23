@@ -1,2 +1,5 @@
 #!/bin/bash
 
+BACKUP_FILE=$CURRENT_BACKUP_DIR/ldap.tar.bz2
+
+tar -cjf $BACKUP_FILE -C /mnt/dbs ldap || exit 1
