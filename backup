@@ -15,7 +15,7 @@ BASE_DIR=/etc/backup-script
 
 #umask 007
 
-mkdir_err=`mkdir $CURRENT_BACKUP_DIR`
+mkdir_err=`mkdir 2>&1 $CURRENT_BACKUP_DIR`
 if [ $? != 0 ]; then
   echo "Das Verzeichnis $CURRENT_BACKUP_DIR exsistiert bereits."
   echo "Kein Backup angelegt."
@@ -26,7 +26,11 @@ fi
 
 cd $CURRENT_BACKUP_DIR
 
-run-parts $BASE_DIR/tasks
+run-parts --exit-on-error $BASE_DIR/tasks
+if [ $? != 0 ]; then
+    echo "Fehler beim ausführen der Backup-scripte!"
+    exit 1
+fi
 
 chown -R backup.backup $CURRENT_BACKUP_DIR
 chmod -R 660 $CURRENT_BACKUP_DIR
