@@ -1,7 +1,8 @@
 #!/bin/sh
 #
 
-. `dirname $0`/backup.conf
+CONF_FILE=/tmp/backup/backup-script/backup.conf
+. $CONF_FILE
 
 #######################
 #
@@ -9,9 +10,11 @@
 #
 ########################
 
+export CONF_FILE
 export CURRENT_BACKUP_DIR=$BACKUP_STORE/`date +%Y-%m-%d`
-#BASE_DIR=`pwd dirname $0`
-BASE_DIR=/etc/backup-script
+if [ -z $BACKUP_SCRIPTS_DIR ]; then
+  BACKUP_SCRIPTS_DIR=`pwd dirname $0`
+fi
 
 #umask 007
 
@@ -26,7 +29,7 @@ fi
 
 cd $CURRENT_BACKUP_DIR
 
-run-parts --exit-on-error $BASE_DIR/tasks
+run-parts --exit-on-error $BACKUP_SCRIPTS_DIR/tasks
 if [ $? != 0 ]; then
     echo "Fehler beim ausführen der Backup-scripte!"
     exit 1

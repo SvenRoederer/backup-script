@@ -2,4 +2,4 @@
 
 BACKUP_FILE=$CURRENT_BACKUP_DIR/bind.tar.bz2
 
-tar -cjf $BACKUP_FILE -C /mnt/dbs bind
+tar -cjf $BACKUP_FILE -C /mnt/dbs bind || exit 1

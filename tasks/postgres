@@ -7,10 +7,12 @@ touch $DB_BACKUPFILE
 touch $DB_ERRORLOG
 chown postgres $DB_BACKUPFILE
 chown postgres $DB_ERRORLOG
-su postgres -c "/usr/bin/pg_dumpall -D 2>$DB_ERRORLOG | bzip2 >$DB_BACKUPFILE"
+su postgres -c "/usr/bin/pg_dumpall -D 2>$DB_ERRORLOG | bzip2 >$DB_BACKUPFILE" || exit 1
 chown root $DB_BACKUPFILE
-chown root $DB_ERRORLOG
-
-if [ ! -s $DB_ERRORLOG ]; then
-    rm $DB_ERRORLOG
+if [ -s $DB_ERRORLOG ]; then
+  chown root $DB_ERRORLOG
+else
+  rm $DB_ERRORLOG
 fi
+
+
