@@ -33,10 +33,10 @@ chown -R backup.backup $CURRENT_BACKUP_DIR
 chmod -R 660 $CURRENT_BACKUP_DIR
 chmod 750 $CURRENT_BACKUP_DIR
 
-if [ -e $BACKUP_STORE/current ]; then
-  rm $BACKUP_STORE/current
-fi
-ln -s $CURRENT_BACKUP_DIR $BACKUP_STORE/current
+#if [ -e $BACKUP_STORE/current ]; then
+rm -f $BACKUP_STORE/current
+#fi
+ln -sf $CURRENT_BACKUP_DIR $BACKUP_STORE/current
 
 # delete old backups
 BACKUPS=`ls -d -1 $BACKUP_STORE/????-??-??`
