@@ -1,8 +1,7 @@
 #!/bin/sh
 #
 
-HOLD_BACKUPS=5
-BACKUP_STORE=/mnt/backup-cache/feeble
+. `dirname $0`/backup.conf
 
 #######################
 #
