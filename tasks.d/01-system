@@ -1,7 +1,6 @@
 #!/bin/sh
 
 . $CONF_FILE
-echo $SYSTEM_DIRS
 
 for dir in $SYSTEM_DIRS ; do
  FILE=`basename $dir`
