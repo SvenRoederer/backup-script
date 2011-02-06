@@ -48,8 +48,8 @@ ln -sf $CURRENT_BACKUP_DIR $BACKUP_STORE/current
 # delete old backups
 BACKUPS=`ls -d -1 $BACKUP_STORE/????-??-??`
 NUM_BACKUPS=`echo "$BACKUPS"|wc -l`
-if [ $NUM_BACKUPS -gt $HOLD_BACKUPS ]; then
-  NUM_DIRS_TO_DEL=`echo "$NUM_BACKUPS-$HOLD_BACKUPS"|bc`
+if [ $NUM_BACKUPS -gt $BACKUP_KEEP ]; then
+  NUM_DIRS_TO_DEL=`echo "$NUM_BACKUPS-$BACKUP_KEEP"|bc`
   DIRS_TO_DEL=`echo "$BACKUPS"|head -n $NUM_DIRS_TO_DEL -`
 #  echo $NUM_DIRS_TO_DEL backups zu löschen
   rm -r $DIRS_TO_DEL
