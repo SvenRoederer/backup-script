@@ -17,6 +17,12 @@ if [ -z $BACKUP_SCRIPTS_DIR ]; then
   BACKUP_SCRIPTS_DIR=$BACKUP_SCRIPTS_DIR/tasks.d/
 fi
 
+if [ ! -d $BACKUP_SCRIPTS_DIR ]; then
+    echo "Das verzeichnis mit den Backup-scripten exsistiert nicht."
+    echo "Ist der Parameter BACKUP_SCRIPTS_DIR richtig gesetzt?"
+    exit 1
+fi
+
 #umask 007
 
 mkdir_err=`mkdir 2>&1 $CURRENT_BACKUP_DIR`
