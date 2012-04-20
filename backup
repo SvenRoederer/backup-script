@@ -1,5 +1,9 @@
 #!/bin/sh
 #
+#
+# variables exported to the scripts
+# BACKUPFILE_PREFIX : current date (yymmdd) suffixed by "-"
+#
 
 CONF_FILE=/etc/backup-script/backup.conf
 . $CONF_FILE
@@ -33,6 +37,8 @@ if [ $? != 0 ]; then
   echo $mkdir_err
   exit 1
 fi
+
+export BACKUPFILE_PREFIX=$CURRENT_BACKUP_DIR/`date +%Y%m%d`-
 
 cd $CURRENT_BACKUP_DIR
 

@@ -3,16 +3,17 @@
 . $CONF_FILE
 
 for dir in $SYSTEM_DIRS ; do
- FILE=`basename $dir`
- tar -cjf $CURRENT_BACKUP_DIR/$FILE.tar.bz2 -C $dir . || exit 1
-done
-if [ ! -s $CURRENT_BACKUP_DIR/$FILE.tar.bz2 ]; then
-    echo $CURRENT_BACKUP_DIR/$FILE.tar.bz2 not correct
+ FILE="${BACKUPFILE_PREFIX}`basename $dir`".tar.bz2
+ tar -cjf $FILE -C $dir . || exit 1
+ if [ ! -s $FILE ]; then
+    echo $FILE not created
     exit 1
-fi
+ fi
+done
 
-dpkg --get-selections |gzip >$CURRENT_BACKUP_DIR/dpkg-selecions.gz || exit 1
-if [ ! -s $CURRENT_BACKUP_DIR/dpkg-selecions.gz ]; then
-    echo $CURRENT_BACKUP_DIR/dpkg-selecions.gz not correct
+DPKG_FILE=${BACKUPFILE_PREFIX}dpkg-selecions.gz
+dpkg --get-selections |gzip >$DPKG_FILE || exit 1
+if [ ! -s $DPKG_FILE ]; then
+    echo $DPKG_FILE not correct
     exit 1
 fi
