@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MM_FILE=$CURRENT_BACKUP_DIR/mailman.tar
+MM_FILE=${BACKUPFILE_PREFIX}mailman.tar
 
 tar -cf $MM_FILE -C /mnt/dbs mailman-archives
 tar -rf $MM_FILE -C / var/lib/mailman
