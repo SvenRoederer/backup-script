@@ -2,6 +2,11 @@
 
 MM_FILE=${BACKUPFILE_PREFIX}mailman.tar
 
-tar -cf $MM_FILE -C /mnt/dbs mailman-archives
-tar -rf $MM_FILE -C / var/lib/mailman
-bzip2 $MM_FILE
+tar -cf $MM_FILE --exclude=archives -C /var/lib/mailman .
+tar -rhf $MM_FILE -C /var/lib/mailman archives
+if [ ! -s $MM_FILE ]; then
+ echo $MM_FILE not created
+ exit 1
+else
+ bzip2 $MM_FILE
+fi
