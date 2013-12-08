@@ -1,0 +1,16 @@
+#!/bin/sh
+
+DB_BACKUPFILE=${BACKUPFILE_PREFIX}mysql_dump.sql.bz2
+DB_ERRORLOG=${BACKUPFILE_PREFIX}mysql_backup.errlog
+
+touch $DB_BACKUPFILE
+touch $DB_ERRORLOG
+#chown postgres $DB_BACKUPFILE
+#chown postgres $DB_ERRORLOG
+mysqldump --defaults-extra-file=/etc/mysql/debian.cnf -A -Y --single-transaction --create-options 2>$DB_ERRORLOG | bzip2 >$DB_BACKUPFILE
+#chown root $DB_BACKUPFILE
+#if [ -s $DB_ERRORLOG ]; then
+#  chown root $DB_ERRORLOG
+#else
+#  rm $DB_ERRORLOG
+#fi
