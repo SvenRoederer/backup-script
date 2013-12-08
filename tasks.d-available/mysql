@@ -7,7 +7,7 @@ touch $DB_BACKUPFILE
 touch $DB_ERRORLOG
 #chown postgres $DB_BACKUPFILE
 #chown postgres $DB_ERRORLOG
-mysqldump --defaults-extra-file=/etc/mysql/debian.cnf -A -Y --single-transaction --create-options 2>$DB_ERRORLOG | bzip2 >$DB_BACKUPFILE
+mysqldump --defaults-extra-file=/etc/mysql/debian.cnf -A -Y -E --single-transaction --create-options 2>$DB_ERRORLOG | bzip2 >$DB_BACKUPFILE
 #chown root $DB_BACKUPFILE
 #if [ -s $DB_ERRORLOG ]; then
 #  chown root $DB_ERRORLOG
