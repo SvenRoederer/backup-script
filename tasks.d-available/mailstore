@@ -1,0 +1,14 @@
+#!/bin/bash
+
+. $CONF_FILE
+
+BACKUP_FILE=${BACKUPFILE_PREFIX}maildir.tar.bz2
+SNAPSHOT=`basename $0`_snap
+
+lvcreate >/dev/null -sn $SNAPSHOT -L 1G /dev/vg_raid/maildir
+mkdir ./$SNAPSHOT
+mount -o ro /dev/vg_raid/$SNAPSHOT ./$SNAPSHOT
+tar -cjf $BACKUP_FILE -C ./$SNAPSHOT .
+umount ./$SNAPSHOT
+rm -rf ./$SNAPSHOT
+lvremove >/dev/null -f /dev/vg_raid/$SNAPSHOT
