@@ -11,6 +11,7 @@ su postgres -c "/usr/bin/pg_dumpall 2>$DB_ERRORLOG | bzip2 >$DB_BACKUPFILE" || e
 chown root $DB_BACKUPFILE
 if [ -s $DB_ERRORLOG ]; then
   chown root $DB_ERRORLOG
+  echo "An error occured during postgres-backup. please check logfile"
 else
   rm $DB_ERRORLOG
 fi
