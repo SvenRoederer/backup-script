@@ -1,0 +1,13 @@
+#!/bin/sh
+
+. $CONF_FILE
+
+for dir in $DIRECTORIES ; do
+ FILE=dir_`basename $dir`
+ tar -cjf $CURRENT_BACKUP_DIR/$FILE.tar.bz2 -C $dir . || exit 1
+done
+
+if [ ! -s $CURRENT_BACKUP_DIR/$FILE.tar.bz2 ]; then
+    echo $CURRENT_BACKUP_DIR/$FILE.tar.bz2 not correct
+    exit 1
+fi
