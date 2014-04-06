@@ -1,0 +1,3 @@
+In the directory are the scripts whih will be execute during the job.
+
+Just link the relevant tasks fome the "tasks.d-available"-directoy.
