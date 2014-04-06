@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BACKUP_FILE=$CURRENT_BACKUP_DIR/subversion.bz2
+BACKUP_FILE=${BACKUPFILE_PREFIX}/subversion.bz2
 SVN_REPO=/mnt/dbs/subversion
 
 svnadmin dump -q $SVN_REPO |bzip2 >$BACKUP_FILE

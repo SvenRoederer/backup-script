@@ -3,11 +3,11 @@
 . $CONF_FILE
 
 for dir in $DIRECTORIES ; do
- FILE=dir_`basename $dir`
- tar -cjf $CURRENT_BACKUP_DIR/$FILE.tar.bz2 -C $dir . || exit 1
+ FILE=${BACKUPFILE_PREFIX}dir_`basename $dir`
+ tar -cjf $FILE.tar.bz2 -C $dir . || exit 1
 done
 
-if [ ! -s $CURRENT_BACKUP_DIR/$FILE.tar.bz2 ]; then
-    echo $CURRENT_BACKUP_DIR/$FILE.tar.bz2 not correct
+if [ ! -s $FILE.tar.bz2 ]; then
+    echo $FILE.tar.bz2 not correct
     exit 1
 fi
