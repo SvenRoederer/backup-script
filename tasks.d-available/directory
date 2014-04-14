@@ -4,10 +4,10 @@
 
 for dir in $DIRECTORIES ; do
  FILE=${BACKUPFILE_PREFIX}dir_`basename $dir`
- tar -cjf $FILE.tar.bz2 -C $dir . || exit 1
+ tar -cjf $FILE.tar.bz2 --warning=no-file-changed -C $dir .
+ RC_TAR=$?
+ if [ ${RC_TAR} -gt 1 ]; then
+  echo failure during taring files
+  exit ${RC_TAR}
+ fi
 done
-
-if [ ! -s $FILE.tar.bz2 ]; then
-    echo $FILE.tar.bz2 not correct
-    exit 1
-fi
