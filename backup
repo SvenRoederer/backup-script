@@ -16,6 +16,8 @@ CONF_FILE=/etc/backup-script/backup.conf
 
 export CONF_FILE
 export CURRENT_BACKUP_DIR=$BACKUP_STORE/`date +%Y-%m-%d`
+CHECK_COMMANDS="bc run-parts wc"
+
 if [ -z $BACKUP_SCRIPTS_DIR ]; then
   BACKUP_SCRIPTS_DIR=`dirname $0`
   BACKUP_SCRIPTS_DIR=$BACKUP_SCRIPTS_DIR/tasks.d
@@ -24,6 +26,14 @@ fi
 if [ ! -d $BACKUP_SCRIPTS_DIR ]; then
     echo "Das verzeichnis mit den Backup-scripten exsistiert nicht."
     echo "Ist der Parameter BACKUP_SCRIPTS_DIR richtig gesetzt?"
+    exit 1
+fi
+
+which >/dev/null $CHECK_COMMANDS
+if [ $? = 1 ]; then
+    echo "Benötigte Befehle wurden nicht gefunden!"
+    echo "Bitte prüfen ob folgende Programme verfügbar sind:"
+    echo $CHECK_COMMANDS
     exit 1
 fi
 
