@@ -18,7 +18,7 @@ export CONF_FILE
 export CURRENT_BACKUP_DIR=$BACKUP_STORE/`date +%Y-%m-%d`
 if [ -z $BACKUP_SCRIPTS_DIR ]; then
   BACKUP_SCRIPTS_DIR=`dirname $0`
-  BACKUP_SCRIPTS_DIR=$BACKUP_SCRIPTS_DIR/tasks.d/
+  BACKUP_SCRIPTS_DIR=$BACKUP_SCRIPTS_DIR/tasks.d
 fi
 
 if [ ! -d $BACKUP_SCRIPTS_DIR ]; then
