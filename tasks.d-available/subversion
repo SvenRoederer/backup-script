@@ -4,5 +4,5 @@
 
 for REPODIR in $SUBVERSION_REPOS; do
  BACKUP_FILE=${BACKUPFILE_PREFIX}subversion_`basename $REPODIR` 
- svnadmin dump -q $REPODIR |bzip2 >$BACKUP_FILE.bz2
+ nice svnadmin dump -q $REPODIR |bzip2 >$BACKUP_FILE.bz2
 done
