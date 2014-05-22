@@ -1,7 +1,8 @@
 #!/bin/bash
 
-BACKUP_FILE=${BACKUPFILE_PREFIX}subversion.bz2
-SVN_REPO=/mnt/dbs/subversion
+. $CONF_FILE
 
-svnadmin dump -q $SVN_REPO |bzip2 >$BACKUP_FILE
-
+for REPODIR in $SUBVERSION_REPOS; do
+ BACKUP_FILE=${BACKUPFILE_PREFIX}subversion_`basename $REPODIR` 
+ svnadmin dump -q $REPODIR |bzip2 >$BACKUP_FILE.bz2
+done
